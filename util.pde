@@ -1,7 +1,7 @@
-public void CGLine(float x1, float y1, float x2, float y2) {
+public void CGLine(float x1, float y1, float x2, float y2, color c) {
     
-    stroke(0);
-    noFill();
+    // stroke(0);
+    // noFill();
     // line(x1,y1,x2,y2);
     int dx = (int)abs(x2 - x1);
     int dy = (int)abs(y2 - y1);
@@ -10,7 +10,7 @@ public void CGLine(float x1, float y1, float x2, float y2) {
     int err = dx - dy;
 
     while (true) {
-        drawPoint(x1, y1, color(0));
+        drawPoint(x1, y1, c);
         if (x1 == x2 && y1 == y2) {
             break;
         }
@@ -28,10 +28,10 @@ public void CGLine(float x1, float y1, float x2, float y2) {
         
 }
 
-public void CGCircle(float x, float y, float r) {
+public void CGCircle(float x, float y, float r, color c) {
 
-    stroke(0);
-    noFill();
+    // stroke(0);
+    // noFill();
     // circle(x,y,r*2);
     int xc = (int)x;
     int yc = (int)y;
@@ -41,7 +41,7 @@ public void CGCircle(float x, float y, float r) {
 
     float d = 5/4 - r;
 
-    drawCirclePoints(xc, yc, xk, yk, color(0));
+    drawCirclePoints(xc, yc, xk, yk, c);
 
     while (xk < yk) {
         
@@ -52,15 +52,15 @@ public void CGCircle(float x, float y, float r) {
             yk--;
         }
         xk++;
-        drawCirclePoints(xc, yc, xk, yk, color(0));
+        drawCirclePoints(xc, yc, xk, yk, c);
     }
     
 }
 
-public void CGEllipse(float x, float y, float r1, float r2) {
+public void CGEllipse(float x, float y, float r1, float r2, color c) {
     
-    stroke(0);
-    noFill();
+    // stroke(0);
+    // noFill();
     // ellipse(x,y,r1*2,r2*2);
     float xc = x;
     float yc = y;
@@ -72,7 +72,7 @@ public void CGEllipse(float x, float y, float r1, float r2) {
 
     // Region 1
     while(dx < dy) {
-        drawEllipsePoints(xc, yc, xk, yk, color(0));
+        drawEllipsePoints(xc, yc, xk, yk, c);
         if(d1 < 0) {
             xk++;
             dx += 2 * r2 * r2;
@@ -88,7 +88,7 @@ public void CGEllipse(float x, float y, float r1, float r2) {
     float d2 = r2 * r2 * (xk + 0.5f) * (xk + 0.5f) + r1 * r1 * (yk - 1) * (yk - 1) - r1 * r1 * r2 * r2;
     // Region 2
     while(yk >= 0) {
-        drawEllipsePoints(xc, yc, xk, yk, color(0));
+        drawEllipsePoints(xc, yc, xk, yk, c);
         if(d2 > 0) {
             yk--;
             dy -= 2 * r1 * r1;
@@ -105,16 +105,16 @@ public void CGEllipse(float x, float y, float r1, float r2) {
 
 }
 
-public void CGCurve(Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4) {
-    stroke(0);
-    noFill();
+public void CGCurve(Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4, color c) {
+    // stroke(0);
+    // noFill();
     // bezier(p1.x,p1.y,p2.x,p2.y,p3.x,p3.y,p4.x,p4.y);
     float dist = distance(p1, p2) + distance(p2, p3) + distance(p3, p4);
 
     for (float t = 0; t <= 1; t += 0.5f / dist) {
         float x = bezierPoint(p1.x, p2.x, p3.x, p4.x, t);
         float y = bezierPoint(p1.y, p2.y, p3.y, p4.y, t);
-        drawPoint(x, y, color(0));
+        drawPoint(x, y, c);
     }
 }
 
@@ -127,6 +127,16 @@ public void CGEraser(Vector3 p1, Vector3 p2) {
         for (int j = y1; j <= y2; j++) {
             drawPoint(i, j, color(250));
         }
+    }
+}
+
+public void CGSprays(float x, float y, float radius, int density) {
+    for (int i = 0; i < density; i++) {
+        float angle = random(TWO_PI);
+        float r = random(radius);
+        float sprayX = x + r * cos(angle);
+        float sprayY = y + r * sin(angle);
+        drawPoint(sprayX, sprayY, color(0));
     }
 }
 
