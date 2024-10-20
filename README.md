@@ -9,7 +9,7 @@
 
 ### BONUS 
 
-[+1.5 Semester Score] Add some features that were not present in this assignment.
+- [x] Add a Palette
 
 
 which tasks you have completed
