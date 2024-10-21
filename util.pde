@@ -3,7 +3,7 @@ public boolean checkInBox(float x1, float y1) {
     // size(1000, 800);
     float width = 1000;
     float height = 800;
-    if (x1 > 20 && x1 < width - 40 && y1 > 50 && y1 < height - 100) {
+    if (x1 > 20 && x1 < width - 40 +20 && y1 > 50 && y1 < height - 100 +50) {
         return true;
     }
     return false;
