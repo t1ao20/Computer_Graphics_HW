@@ -8,7 +8,7 @@
 - [x] (20%) Correctly complete the eraser.
 ### BONUS 
 - [x] A Palette
-- [X] A Sprays --and active ver--
+- [X] A Sprays ~~and active ver~~
 ### screenshots & how I completed these tasks
 ### STANDARD
 #### (25%) Correctly complete the line algorithm.
