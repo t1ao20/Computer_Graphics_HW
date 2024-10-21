@@ -23,6 +23,8 @@ ShapeButton curveButton;
 ShapeButton pencilButton;
 ShapeButton eraserButton;
 ShapeButton spraysButton;
+ShapeButton spraysButton_v2;
+// ShapeButton spraysButton_active_ver;
 
 int selectedColor;
 // Color Buttons
@@ -39,7 +41,10 @@ ShapeButton grayButton;
 
 ShapeButton pinkButton;
 ShapeButton brownButton;
+
 ShapeButton anycolorButton;
+
+ShapeButton getColorButton;
 
 
 Button clearButton;
@@ -214,18 +219,33 @@ public void initButton() {
     eraserButton.setBoxAndClickColor(color(250), color(150));
     shapeButton.add(eraserButton);
 
-    spraysButton = new ShapeButton(255, 10, 30, 30) {
+    spraysButton = new ShapeButton(290, 10, 30, 30) {
         @Override
         public Renderer getRendererType() {
-            return new SpraysRenderer();
+            SpraysRenderer sr = new SpraysRenderer();
+            sr.setColor(selectedColor);
+            return sr;
         }
     };
-    spraysButton.setImage(loadImage("palette.png"));
+    spraysButton.setImage(loadImage("sprays_active.png"));
 
     spraysButton.setBoxAndClickColor(color(250), color(150));
     shapeButton.add(spraysButton);
 
-    redButton = new ShapeButton(300,10,15,15){
+    spraysButton_v2 = new ShapeButton(255, 10, 30, 30) {
+        @Override
+        public Renderer getRendererType() {
+            SpraysRenderer_v2 sr_v2 = new SpraysRenderer_v2();
+            sr_v2.setColor(selectedColor);
+            return sr_v2;
+        }
+    };
+    spraysButton_v2.setImage(loadImage("sprays.png"));
+
+    spraysButton_v2.setBoxAndClickColor(color(250), color(150));
+    shapeButton.add(spraysButton_v2);
+
+    redButton = new ShapeButton(325,10,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(255,0,0);
@@ -235,7 +255,7 @@ public void initButton() {
     redButton.setBoxAndClickColor(color(255,0,0),color(255,50,50));
     shapeButton.add(redButton);
 
-    orangeButton = new ShapeButton(320,10,15,15){
+    orangeButton = new ShapeButton(345,10,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(255,165,0);
@@ -245,7 +265,7 @@ public void initButton() {
     orangeButton.setBoxAndClickColor(color(255,165,0),color(255,215,0));
     shapeButton.add(orangeButton);
 
-    yellowButton = new ShapeButton(340,10,15,15){
+    yellowButton = new ShapeButton(365,10,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(255,255,0);
@@ -255,7 +275,7 @@ public void initButton() {
     yellowButton.setBoxAndClickColor(color(255,255,0),color(255,255,50));
     shapeButton.add(yellowButton);
 
-    greenButton = new ShapeButton(360,10,15,15){
+    greenButton = new ShapeButton(385,10,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(0,128,0);
@@ -265,7 +285,7 @@ public void initButton() {
     greenButton.setBoxAndClickColor(color(0,128,0),color(50,205,50));
     shapeButton.add(greenButton);
 
-    blueButton = new ShapeButton(380,10,15,15){
+    blueButton = new ShapeButton(405,10,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(0,0,255);
@@ -275,7 +295,7 @@ public void initButton() {
     blueButton.setBoxAndClickColor(color(0,0,255),color(50,50,255));
     shapeButton.add(blueButton);
 
-    purpleButton = new ShapeButton(400,10,15,15){
+    purpleButton = new ShapeButton(425,10,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(128,0,128);
@@ -285,7 +305,7 @@ public void initButton() {
     purpleButton.setBoxAndClickColor(color(128,0,128),color(128,50,128));
     shapeButton.add(purpleButton);
 
-    blackButton = new ShapeButton(300,30,15,15){
+    blackButton = new ShapeButton(325,30,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(0);
@@ -295,7 +315,7 @@ public void initButton() {
     blackButton.setBoxAndClickColor(color(0),color(50));
     shapeButton.add(blackButton);
 
-    whiteButton = new ShapeButton(320,30,15,15){
+    whiteButton = new ShapeButton(345,30,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(255);
@@ -305,7 +325,7 @@ public void initButton() {
     whiteButton.setBoxAndClickColor(color(255),color(205,205,205));
     shapeButton.add(whiteButton);
 
-    grayButton = new ShapeButton(340,30,15,15){
+    grayButton = new ShapeButton(365,30,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(128);
@@ -315,7 +335,7 @@ public void initButton() {
     grayButton.setBoxAndClickColor(color(128),color(178));
     shapeButton.add(grayButton);
 
-    pinkButton = new ShapeButton(360,30,15,15){
+    pinkButton = new ShapeButton(385,30,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(255,192,203);
@@ -325,7 +345,7 @@ public void initButton() {
     pinkButton.setBoxAndClickColor(color(255,192,203),color(255,182,193));
     shapeButton.add(pinkButton);
 
-    brownButton = new ShapeButton(380,30,15,15){
+    brownButton = new ShapeButton(405,30,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(165,42,42);
@@ -650,6 +670,50 @@ public class EraseArea implements Shape {
     @Override
     public void drawShape() {
         CGEraser(point1, point2);
+    }
+}
+
+public class Sprays_v2 implements Shape {
+    ArrayList<Vector3> points = new ArrayList<Vector3>();
+    int currentColor;
+    float sprayRadius = 20; // Default radius
+    int sprayDensity = 50; // Default density
+
+    public Sprays_v2(ArrayList<Vector3> p, int c, float sR, int sD) {
+        points = p;
+        currentColor = c;
+        sprayRadius = sR;
+        sprayDensity = sD;
+    }
+
+    @Override
+    public void drawShape() {
+        if (points.size() <= 1)
+            return;
+        for (int i = 0; i < points.size(); i++) {
+            Vector3 p = points.get(i);
+            drawPoint(p.x, p.y, currentColor);
+        }
+    }
+}
+
+
+public class Sprays implements Shape {
+    Vector3 point = new Vector3();
+    int currentColor;
+    float sprayRadius = 20; // Default radius
+    int sprayDensity = 50; // Default density
+
+    public Sprays(Vector3 p, int c, float sR, int sD) {
+        point = p;
+        currentColor = c;
+        sprayRadius = sR;
+        sprayDensity = sD;
+    }
+
+    @Override
+    public void drawShape() {
+        CGSprays(point.x, point.y, sprayRadius, sprayDensity, currentColor);
     }
 }
 public class ShapeRenderer{
@@ -983,9 +1047,9 @@ class CurveRenderer implements Renderer{
   }
 }
 
-public class SpraysRenderer implements Renderer{
-    
-    private ArrayList<Vector3> points = new ArrayList<Vector3>();
+public class SpraysRenderer_v2 implements Renderer{
+    ArrayList<Vector3> points = new ArrayList<Vector3>();
+    Vector3 point;
     private boolean once;
     private float sprayRadius = 20; // Default radius
     private int sprayDensity = 50; // Default density
@@ -999,28 +1063,89 @@ public class SpraysRenderer implements Renderer{
     public void render(){
         if(!shapeRenderer.checkInBox(new Vector3(mouseX,mouseY,0))) return;
         if(mousePressed){
-            once = false;
-            points.add(new Vector3(mouseX,mouseY,0));
-            // CGSprays(mouseX,mouseY,sprayRadius,sprayDensity);
-        }else{
-            if(!once){
-                once = true;
-                shapeRenderer.addShape(new Point(points, currentColor)); 
-                points = new ArrayList<Vector3>();
+            point = new Vector3(mouseX,mouseY,0);
+            points = Generate_CGSprays(point.x,point.y,sprayRadius,sprayDensity,currentColor);
+            for (int i = 0; i < points.size(); i++) {
+                if(!shapeRenderer.checkInBox(points.get(i))){
+                    points.remove(i);
+                    i--;
+                }
+
             }
+            shapeRenderer.addShape(new Sprays_v2(points, currentColor, sprayRadius, sprayDensity)); 
+
         }
-        if (points.size() <= 1) return;  
-        for (int i = 0; i < points.size() - 1; i++) {
-            Vector3 p1 = points.get(i);
-            Vector3 p2 = points.get(i + 1);
-            CGSprays(p1.x, p1.y, sprayRadius, sprayDensity);
-            CGSprays(p2.x, p2.y, sprayRadius, sprayDensity);
+        if(points.size() < 1) return;
+        for (int i = 0; i < points.size(); i++) {
+            Vector3 p = points.get(i);
+
+            drawPoint(p.x, p.y, currentColor);
         }
        
     }
-
 }
 
+public class SpraysRenderer implements Renderer{
+    
+    Vector3 point;
+    private boolean once;
+    private float sprayRadius = 20; // Default radius
+    private int sprayDensity = 50; // Default density
+    private int currentColor;
+    
+    @Override
+    public void setColor(int c){
+        currentColor = c;
+    }
+    @Override 
+    public void render(){
+        if(!shapeRenderer.checkInBox(new Vector3(mouseX,mouseY,0))) return;
+        if(mousePressed){
+            point = new Vector3(mouseX,mouseY,0);
+            shapeRenderer.addShape(new Sprays(point, currentColor, sprayRadius, sprayDensity)); 
+            // CGSprays(point.x,point.y,sprayRadius,sprayDensity,currentColor);
+        }
+       
+    }
+}
+
+// public class SpraysRenderer_active_ver implements Renderer{
+    
+//     private ArrayList<Vector3> points = new ArrayList<Vector3>();
+//     private boolean once;
+//     private float sprayRadius = 20; // Default radius
+//     private int sprayDensity = 50; // Default density
+//     private color currentColor;
+    
+//     @Override
+//     public void setColor(color c){
+//         currentColor = c;
+//     }
+//     @Override 
+//     public void render(){
+//         if(!shapeRenderer.checkInBox(new Vector3(mouseX,mouseY,0))) return;
+//         if(mousePressed){
+//             once = false;
+//             points.add(new Vector3(mouseX,mouseY,0));
+//             // CGSprays(mouseX,mouseY,sprayRadius,sprayDensity);
+//         }else{
+//             if(!once){
+//                 once = true;
+//                 shapeRenderer.addShape(new Sprays_active_ver(points, currentColor, sprayRadius, sprayDensity)); 
+//                 points = new ArrayList<Vector3>();
+//             }
+//         }
+//         if (points.size() <= 1) return;  
+//         for (int i = 0; i < points.size() - 1; i++) {
+//             Vector3 p1 = points.get(i);
+//             // Vector3 p2 = points.get(i + 1);
+//             CGSprays_active_ver(p1.x, p1.y, sprayRadius, sprayDensity, currentColor);
+//             // CGSprays(p2.x, p2.y, sprayRadius, sprayDensity);
+//         }
+       
+//     }
+
+// }
 class colorRenderer implements Renderer{
     private int currentColor;
     
@@ -1303,6 +1428,18 @@ static final public class Vector3 {
         return "x : " + x + " y : " + y + " z : " + z;
     }
 }
+public boolean checkInBox(float x1, float y1) {
+    // Box(20,50,width-40,height-100);
+    // size(1000, 800);
+    float width = 1000;
+    float height = 800;
+    if (x1 > 20 && x1 < width - 40 && y1 > 50 && y1 < height - 100) {
+        return true;
+    }
+    return false;
+    
+}
+
 public void CGLine(float x1, float y1, float x2, float y2, int c) {
     
     // stroke(0);
@@ -1435,19 +1572,35 @@ public void CGEraser(Vector3 p1, Vector3 p2) {
     }
 }
 
-public void CGSprays(float x, float y, float radius, int density) {
+public void CGSprays(float x, float y, float radius, int density, int c) {
     for (int i = 0; i < density; i++) {
-        float angle = random(TWO_PI);
-        float r = random(radius);
-        float sprayX = x + r * cos(angle);
-        float sprayY = y + r * sin(angle);
-        drawPoint(sprayX, sprayY, color(0));
+        float offsetX = random(-radius, radius);
+        float offsetY = random(-radius, radius);
+        float distance = dist(x, y, x + offsetX, y + offsetY);
+        if (distance < radius) {
+            drawPoint(x + offsetX, y + offsetY, c);
+        }
     }
+}
+
+public ArrayList<Vector3> Generate_CGSprays(float x, float y, float radius, int density, int c) {
+    ArrayList<Vector3> points = new ArrayList<Vector3>();
+    for (int i = 0; i < density; i++) {
+        float offsetX = random(-radius, radius);
+        float offsetY = random(-radius, radius);
+        float distance = dist(x, y, x + offsetX, y + offsetY);
+        if (distance < radius) {
+            points.add(new Vector3(x + offsetX, y + offsetY, 0));
+            drawPoint(x + offsetX, y + offsetY, c);
+        }
+    }
+    return points;
 }
 
 public void drawPoint(float x, float y, int c) {
     stroke(c);
-    point(x, y);
+    if (checkInBox(x, y))
+        point(x, y);
 }
 
 public float distance(Vector3 a, Vector3 b) {

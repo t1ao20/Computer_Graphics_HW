@@ -1,3 +1,15 @@
+public boolean checkInBox(float x1, float y1) {
+    // Box(20,50,width-40,height-100);
+    // size(1000, 800);
+    float width = 1000;
+    float height = 800;
+    if (x1 > 20 && x1 < width - 40 && y1 > 50 && y1 < height - 100) {
+        return true;
+    }
+    return false;
+    
+}
+
 public void CGLine(float x1, float y1, float x2, float y2, color c) {
     
     // stroke(0);
@@ -130,19 +142,35 @@ public void CGEraser(Vector3 p1, Vector3 p2) {
     }
 }
 
-public void CGSprays(float x, float y, float radius, int density) {
+public void CGSprays(float x, float y, float radius, int density, color c) {
     for (int i = 0; i < density; i++) {
-        float angle = random(TWO_PI);
-        float r = random(radius);
-        float sprayX = x + r * cos(angle);
-        float sprayY = y + r * sin(angle);
-        drawPoint(sprayX, sprayY, color(0));
+        float offsetX = random(-radius, radius);
+        float offsetY = random(-radius, radius);
+        float distance = dist(x, y, x + offsetX, y + offsetY);
+        if (distance < radius) {
+            drawPoint(x + offsetX, y + offsetY, c);
+        }
     }
+}
+
+public ArrayList<Vector3> Generate_CGSprays(float x, float y, float radius, int density, color c) {
+    ArrayList<Vector3> points = new ArrayList<Vector3>();
+    for (int i = 0; i < density; i++) {
+        float offsetX = random(-radius, radius);
+        float offsetY = random(-radius, radius);
+        float distance = dist(x, y, x + offsetX, y + offsetY);
+        if (distance < radius) {
+            points.add(new Vector3(x + offsetX, y + offsetY, 0));
+            drawPoint(x + offsetX, y + offsetY, c);
+        }
+    }
+    return points;
 }
 
 public void drawPoint(float x, float y, color c) {
     stroke(c);
-    point(x, y);
+    if (checkInBox(x, y))
+        point(x, y);
 }
 
 public float distance(Vector3 a, Vector3 b) {

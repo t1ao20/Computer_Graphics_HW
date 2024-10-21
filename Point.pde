@@ -145,3 +145,47 @@ public class EraseArea implements Shape {
         CGEraser(point1, point2);
     }
 }
+
+public class Sprays_v2 implements Shape {
+    ArrayList<Vector3> points = new ArrayList<Vector3>();
+    color currentColor;
+    float sprayRadius = 20; // Default radius
+    int sprayDensity = 50; // Default density
+
+    public Sprays_v2(ArrayList<Vector3> p, color c, float sR, int sD) {
+        points = p;
+        currentColor = c;
+        sprayRadius = sR;
+        sprayDensity = sD;
+    }
+
+    @Override
+    public void drawShape() {
+        if (points.size() <= 1)
+            return;
+        for (int i = 0; i < points.size(); i++) {
+            Vector3 p = points.get(i);
+            drawPoint(p.x, p.y, currentColor);
+        }
+    }
+}
+
+
+public class Sprays implements Shape {
+    Vector3 point = new Vector3();
+    color currentColor;
+    float sprayRadius = 20; // Default radius
+    int sprayDensity = 50; // Default density
+
+    public Sprays(Vector3 p, color c, float sR, int sD) {
+        point = p;
+        currentColor = c;
+        sprayRadius = sR;
+        sprayDensity = sD;
+    }
+
+    @Override
+    public void drawShape() {
+        CGSprays(point.x, point.y, sprayRadius, sprayDensity, currentColor);
+    }
+}

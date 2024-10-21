@@ -329,9 +329,9 @@ class CurveRenderer implements Renderer{
   }
 }
 
-public class SpraysRenderer implements Renderer{
-    
-    private ArrayList<Vector3> points = new ArrayList<Vector3>();
+public class SpraysRenderer_v2 implements Renderer{
+    ArrayList<Vector3> points = new ArrayList<Vector3>();
+    Vector3 point;
     private boolean once;
     private float sprayRadius = 20; // Default radius
     private int sprayDensity = 50; // Default density
@@ -345,28 +345,89 @@ public class SpraysRenderer implements Renderer{
     public void render(){
         if(!shapeRenderer.checkInBox(new Vector3(mouseX,mouseY,0))) return;
         if(mousePressed){
-            once = false;
-            points.add(new Vector3(mouseX,mouseY,0));
-            // CGSprays(mouseX,mouseY,sprayRadius,sprayDensity);
-        }else{
-            if(!once){
-                once = true;
-                shapeRenderer.addShape(new Point(points, currentColor)); 
-                points = new ArrayList<Vector3>();
+            point = new Vector3(mouseX,mouseY,0);
+            points = Generate_CGSprays(point.x,point.y,sprayRadius,sprayDensity,currentColor);
+            for (int i = 0; i < points.size(); i++) {
+                if(!shapeRenderer.checkInBox(points.get(i))){
+                    points.remove(i);
+                    i--;
+                }
+
             }
+            shapeRenderer.addShape(new Sprays_v2(points, currentColor, sprayRadius, sprayDensity)); 
+
         }
-        if (points.size() <= 1) return;  
-        for (int i = 0; i < points.size() - 1; i++) {
-            Vector3 p1 = points.get(i);
-            Vector3 p2 = points.get(i + 1);
-            CGSprays(p1.x, p1.y, sprayRadius, sprayDensity);
-            CGSprays(p2.x, p2.y, sprayRadius, sprayDensity);
+        if(points.size() < 1) return;
+        for (int i = 0; i < points.size(); i++) {
+            Vector3 p = points.get(i);
+
+            drawPoint(p.x, p.y, currentColor);
         }
        
     }
-
 }
 
+public class SpraysRenderer implements Renderer{
+    
+    Vector3 point;
+    private boolean once;
+    private float sprayRadius = 20; // Default radius
+    private int sprayDensity = 50; // Default density
+    private color currentColor;
+    
+    @Override
+    public void setColor(color c){
+        currentColor = c;
+    }
+    @Override 
+    public void render(){
+        if(!shapeRenderer.checkInBox(new Vector3(mouseX,mouseY,0))) return;
+        if(mousePressed){
+            point = new Vector3(mouseX,mouseY,0);
+            shapeRenderer.addShape(new Sprays(point, currentColor, sprayRadius, sprayDensity)); 
+            // CGSprays(point.x,point.y,sprayRadius,sprayDensity,currentColor);
+        }
+       
+    }
+}
+
+// public class SpraysRenderer_active_ver implements Renderer{
+    
+//     private ArrayList<Vector3> points = new ArrayList<Vector3>();
+//     private boolean once;
+//     private float sprayRadius = 20; // Default radius
+//     private int sprayDensity = 50; // Default density
+//     private color currentColor;
+    
+//     @Override
+//     public void setColor(color c){
+//         currentColor = c;
+//     }
+//     @Override 
+//     public void render(){
+//         if(!shapeRenderer.checkInBox(new Vector3(mouseX,mouseY,0))) return;
+//         if(mousePressed){
+//             once = false;
+//             points.add(new Vector3(mouseX,mouseY,0));
+//             // CGSprays(mouseX,mouseY,sprayRadius,sprayDensity);
+//         }else{
+//             if(!once){
+//                 once = true;
+//                 shapeRenderer.addShape(new Sprays_active_ver(points, currentColor, sprayRadius, sprayDensity)); 
+//                 points = new ArrayList<Vector3>();
+//             }
+//         }
+//         if (points.size() <= 1) return;  
+//         for (int i = 0; i < points.size() - 1; i++) {
+//             Vector3 p1 = points.get(i);
+//             // Vector3 p2 = points.get(i + 1);
+//             CGSprays_active_ver(p1.x, p1.y, sprayRadius, sprayDensity, currentColor);
+//             // CGSprays(p2.x, p2.y, sprayRadius, sprayDensity);
+//         }
+       
+//     }
+
+// }
 class colorRenderer implements Renderer{
     private color currentColor;
     

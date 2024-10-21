@@ -6,6 +6,8 @@ ShapeButton curveButton;
 ShapeButton pencilButton;
 ShapeButton eraserButton;
 ShapeButton spraysButton;
+ShapeButton spraysButton_v2;
+// ShapeButton spraysButton_active_ver;
 
 color selectedColor;
 // Color Buttons
@@ -22,7 +24,10 @@ ShapeButton grayButton;
 
 ShapeButton pinkButton;
 ShapeButton brownButton;
+
 ShapeButton anycolorButton;
+
+ShapeButton getColorButton;
 
 
 Button clearButton;
@@ -197,18 +202,33 @@ public void initButton() {
     eraserButton.setBoxAndClickColor(color(250), color(150));
     shapeButton.add(eraserButton);
 
-    spraysButton = new ShapeButton(255, 10, 30, 30) {
+    spraysButton = new ShapeButton(290, 10, 30, 30) {
         @Override
         public Renderer getRendererType() {
-            return new SpraysRenderer();
+            SpraysRenderer sr = new SpraysRenderer();
+            sr.setColor(selectedColor);
+            return sr;
         }
     };
-    spraysButton.setImage(loadImage("palette.png"));
+    spraysButton.setImage(loadImage("sprays_active.png"));
 
     spraysButton.setBoxAndClickColor(color(250), color(150));
     shapeButton.add(spraysButton);
 
-    redButton = new ShapeButton(300,10,15,15){
+    spraysButton_v2 = new ShapeButton(255, 10, 30, 30) {
+        @Override
+        public Renderer getRendererType() {
+            SpraysRenderer_v2 sr_v2 = new SpraysRenderer_v2();
+            sr_v2.setColor(selectedColor);
+            return sr_v2;
+        }
+    };
+    spraysButton_v2.setImage(loadImage("sprays.png"));
+
+    spraysButton_v2.setBoxAndClickColor(color(250), color(150));
+    shapeButton.add(spraysButton_v2);
+
+    redButton = new ShapeButton(325,10,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(255,0,0);
@@ -218,7 +238,7 @@ public void initButton() {
     redButton.setBoxAndClickColor(color(255,0,0),color(255,50,50));
     shapeButton.add(redButton);
 
-    orangeButton = new ShapeButton(320,10,15,15){
+    orangeButton = new ShapeButton(345,10,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(255,165,0);
@@ -228,7 +248,7 @@ public void initButton() {
     orangeButton.setBoxAndClickColor(color(255,165,0),color(255,215,0));
     shapeButton.add(orangeButton);
 
-    yellowButton = new ShapeButton(340,10,15,15){
+    yellowButton = new ShapeButton(365,10,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(255,255,0);
@@ -238,7 +258,7 @@ public void initButton() {
     yellowButton.setBoxAndClickColor(color(255,255,0),color(255,255,50));
     shapeButton.add(yellowButton);
 
-    greenButton = new ShapeButton(360,10,15,15){
+    greenButton = new ShapeButton(385,10,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(0,128,0);
@@ -248,7 +268,7 @@ public void initButton() {
     greenButton.setBoxAndClickColor(color(0,128,0),color(50,205,50));
     shapeButton.add(greenButton);
 
-    blueButton = new ShapeButton(380,10,15,15){
+    blueButton = new ShapeButton(405,10,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(0,0,255);
@@ -258,7 +278,7 @@ public void initButton() {
     blueButton.setBoxAndClickColor(color(0,0,255),color(50,50,255));
     shapeButton.add(blueButton);
 
-    purpleButton = new ShapeButton(400,10,15,15){
+    purpleButton = new ShapeButton(425,10,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(128,0,128);
@@ -268,7 +288,7 @@ public void initButton() {
     purpleButton.setBoxAndClickColor(color(128,0,128),color(128,50,128));
     shapeButton.add(purpleButton);
 
-    blackButton = new ShapeButton(300,30,15,15){
+    blackButton = new ShapeButton(325,30,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(0);
@@ -278,7 +298,7 @@ public void initButton() {
     blackButton.setBoxAndClickColor(color(0),color(50));
     shapeButton.add(blackButton);
 
-    whiteButton = new ShapeButton(320,30,15,15){
+    whiteButton = new ShapeButton(345,30,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(255);
@@ -288,7 +308,7 @@ public void initButton() {
     whiteButton.setBoxAndClickColor(color(255),color(205,205,205));
     shapeButton.add(whiteButton);
 
-    grayButton = new ShapeButton(340,30,15,15){
+    grayButton = new ShapeButton(365,30,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(128);
@@ -298,7 +318,7 @@ public void initButton() {
     grayButton.setBoxAndClickColor(color(128),color(178));
     shapeButton.add(grayButton);
 
-    pinkButton = new ShapeButton(360,30,15,15){
+    pinkButton = new ShapeButton(385,30,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(255,192,203);
@@ -308,7 +328,7 @@ public void initButton() {
     pinkButton.setBoxAndClickColor(color(255,192,203),color(255,182,193));
     shapeButton.add(pinkButton);
 
-    brownButton = new ShapeButton(380,30,15,15){
+    brownButton = new ShapeButton(405,30,15,15){
         @Override
         public Renderer getRendererType(){
             selectedColor = color(165,42,42);
