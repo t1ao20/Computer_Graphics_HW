@@ -14,9 +14,12 @@
 
 The translation matrix for a 3D transformation is defined as follows:
 
-$ T(t_x, t_y, t_z) = \begin{bmatrix} 1 & 0 & 0 & t_x \\ 0 & 1 & 0 & t_y \\ 0 & 0 & 1 & t_z \\ 0 & 0 & 0 & 1 \end{bmatrix} $
+![image](https://github.com/t1ao20/Computer_Graphics_HW/blob/HW2/images/translation_m.png)
+
 
 so I just assign `t.x`, `t.y`, `t.z` to `m[3]`, `m[7]`, `m[11]` respectively.
+
+![image](https://github.com/t1ao20/Computer_Graphics_HW/blob/HW2/images/pos.gif)
 
 function:
 
@@ -26,9 +29,11 @@ Matrix4::makeTrans(Vector3 t)
 #### 2. Scaling Matrix
 The scaling matrix for a 3D transformation is defined as follows:
 
-$ S(s_x, s_y, s_z) = \begin{bmatrix} s_x & 0 & 0 & 0 \\ 0 & s_y & 0 & 0 \\ 0 & 0 & s_z & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix} $
+![image](https://github.com/t1ao20/Computer_Graphics_HW/blob/HW2/images/scaling_m.png)
 
 so I just assign `s.x`, `s.y`, `s.z` to `m[0]`, `m[5]`, `m[10]` respectively.
+
+![image](https://github.com/t1ao20/Computer_Graphics_HW/blob/HW2/images/scale.gif)
 
 function:
 
@@ -38,13 +43,11 @@ Matrix4::makeScale(Vector3 s)
 #### 3. Rotation Matrix
 The rotation matrix for a 3D transformation is defined as follows:
 
-$R_x(θ)$ = $ \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & cosθ & -sinθ & 0 \\ 0 & sinθ & cosθ & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix} $
-
-$R_y(θ)$ = $ \begin{bmatrix} cosθ & 0 & sinθ & 0 \\ 0 & 1 & 0 & 0 \\ -sinθ & 0 & cosθ & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix} $
-
-$R_z(θ)$ = $ \begin{bmatrix} cosθ & -sinθ & 0 & 0 \\ sinθ & cosθ & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix} $
+![image](https://github.com/t1ao20/Computer_Graphics_HW/blob/HW2/images/rotation_m.png)
 
 I assign the values to the corresponding matrices.
+
+![image](https://github.com/t1ao20/Computer_Graphics_HW/blob/HW2/images/rotate.gif)
 
 function:
 ```
