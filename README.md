@@ -61,6 +61,8 @@ Matrix4::makeRotZ(float a)
 
 `pnpoly` is an implementation of the **point-in-polygon** algorithm.
 
+![image](https://github.com/t1ao20/Computer_Graphics_HW/blob/HW2/images/pnpoly.png)
+
 The function uses a `ray-casting approach`. It "casts" a ray horizontally from the test point $(x, y)$ and counts how many times this ray intersects the polygon's edges. For each edge, defined by two consecutive vertices, it checks whether this edge intersects the horizontal line passing through the test point.
 
 **Conditions for Intersection:**
@@ -88,6 +90,8 @@ util::findBoundBox(Vector3[] v)
 ```
 ### (35%) Correctly implement Sutherland Hodgman Algorithm.
 **Sutherland-Hodgman Algorithm** is used for polygon clipping—finding the portion of a polygon that lies within a specific boundary.
+
+![image](https://github.com/t1ao20/Computer_Graphics_HW/blob/HW2/images/Sutherland_Hodgman.png)
 
 1. **Initial Setup**: 
    - The input polygon vertices (`points`) are loaded into an `input` list.
