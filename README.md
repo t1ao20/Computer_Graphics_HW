@@ -65,6 +65,7 @@ I implements camera movement control using boolean flags triggered by keyboard a
 ![image](https://github.com/t1ao20/Computer_Graphics_HW/blob/HW3/images/cameraControl.gif)
 #### (20%) Correctly implement backculling.
 `debugDraw()` renders a mesh's triangles in screen space using a camera's view-projection matrix. Each triangle's vertices are transformed using the Model-View-Projection (MVP) matrix, homogenized, and mapped to screen coordinates. The triangle's normal vector is computed using the cross product of two edges. If the dot product between the normal and the camera's view vector is negative, the triangle faces the camera and its edges are drawn using `CGLine()`.
+
 ![image](https://github.com/t1ao20/Computer_Graphics_HW/blob/HW3/images/backculling.png)
 ```
 GameObject::debugDraw()
