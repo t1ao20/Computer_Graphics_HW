@@ -147,10 +147,10 @@ public float getDepth(float x, float y, Vector3[] vertex) {
     Vector3 v0v2 = v2.sub(v0);
     Vector3 n = Vector3.cross(v0v1, v0v2);
 
-    float d = -Vector3.dot(n, v0);
-    float z = (-n.x * x - n.y * y - d) / n.z;
+    float d = -1 * Vector3.dot(n, v0);
+    float z = -(n.x * x + n.y * y + d) / n.z;
 
-    return z;
+    return 1/z;
 }
 
 float[] barycentric(Vector3 P, Vector4[] verts) {
