@@ -87,7 +87,7 @@ public class GameObject {
             // View Vector: Vector from camera to a vertex of the triangle
             Vector3 viewVec = Vector3.sub(cam_position, img_pos[0]);
 
-            // If the camera is in the same side of the normal, then the triangle is not visible
+            // If the camera is in the same side of the normal -> the triangle is not visible
             if (Vector3.dot(normal, viewVec) < 0) {
                 CGLine(img_pos[0].x, img_pos[0].y, img_pos[1].x, img_pos[1].y);
                 CGLine(img_pos[1].x, img_pos[1].y, img_pos[2].x, img_pos[2].y);
