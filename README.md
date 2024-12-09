@@ -59,7 +59,11 @@ I computes the depth (z-coordinate) of a point $(x, y)$ within a triangle define
 
 6. **Return the Result**:  
    The computed depth \(z\) is returned.
-   
+
+```
+Camera::setSize(int w, int h, float n, float f)
+util::getDepth(float x, float y, Vector3[] vertex )
+```
 #### (20%) Correctly implement camera control.
 I implements camera movement control using boolean flags triggered by keyboard and mouse input. When arrow keys are pressed, corresponding boolean flags (upPressed, downPressed, leftPressed, rightPressed) are set to true, moving the camera along the x and y axes. Releasing the keys resets the flags. The mouseWheel function adjusts the camera's z-position based on the scroll amount, enabling zoom in/out. The camera's position and orientation are updated using `main_camera.setPositionOrientation(cam_position, lookat)` in `cameraControl()`.
 ![image](https://github.com/t1ao20/Computer_Graphics_HW/blob/HW3/images/cameraControl.gif)
