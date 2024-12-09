@@ -79,7 +79,7 @@ public class GameObject {
                         map(img_pos[j].y, -1, 1, renderer_size.y, renderer_size.w), img_pos[j].z);
             }
 
-            // Calculate the normal vector of the triangle
+            // the normal vector of the triangle
             Vector3 edge1 = Vector3.sub(img_pos[1], img_pos[0]);
             Vector3 edge2 = Vector3.sub(img_pos[2], img_pos[0]);
             Vector3 normal = Vector3.cross(edge1, edge2);
@@ -87,7 +87,7 @@ public class GameObject {
             // View Vector: Vector from camera to a vertex of the triangle
             Vector3 viewVec = Vector3.sub(cam_position, img_pos[0]);
 
-            // If the camera is in the same side of the normal -> the triangle is not visible
+            // If the camera in the same side of the normal -> triangle not visible
             if (Vector3.dot(normal, viewVec) < 0) {
                 CGLine(img_pos[0].x, img_pos[0].y, img_pos[1].x, img_pos[1].y);
                 CGLine(img_pos[1].x, img_pos[1].y, img_pos[2].x, img_pos[2].y);
