@@ -60,7 +60,7 @@ I computes the depth (z-coordinate) of a point $(x, y)$ within a triangle define
 6. **Return the Result**:  
    The computed depth \(1\/z\) is returned.
    
-![image](https://github.com/t1ao20/Computer_Graphics_HW/blob/HW3/images/getdepth.png)
+
 
 ```
 util::getDepth(float x, float y, Vector3[] vertex )
