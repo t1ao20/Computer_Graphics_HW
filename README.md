@@ -8,6 +8,20 @@
 - [X] (25%) Correctly implement Gouraud Shading.
 
 ## screenshots & how I completed these tasks
+### Computer Graphics HW - Images
+
+#### Depth Shading
+![depth](https://github.com/t1ao20/Computer_Graphics_HW/blob/HW4/images/depth.gif)
+
+#### Phong Shading
+![phong](https://github.com/t1ao20/Computer_Graphics_HW/blob/HW4/images/phong.gif)
+
+#### Flat Shading
+![flat](https://github.com/t1ao20/Computer_Graphics_HW/blob/HW4/images/flat.gif)
+
+#### Gouraud Shading
+![gouraud](https://github.com/t1ao20/Computer_Graphics_HW/blob/HW4/images/gouraud.gif)
+
 ### STANDARD
 #### (25%) Correctly implement the barycentric.
 
